@@ -29,14 +29,14 @@
           class="relative"
           :class="{ 'animate-fade-in-up animation-delay-200': isVisible }"
         >
-          <img 
+          <NuxtImg 
             src="https://res.cloudinary.com/dtmt0vas4/image/upload/v1769460604/ChatGPT_Image_Jan_26_2026_09_49_21_PM_gxerq5.png" 
             alt="African woman using Rechargify mobile app for payments" 
             class="rounded-3xl shadow-2xl w-full h-auto object-cover"
             loading="eager"
             width="800"
             height="1000"
-          >
+          />
         </div>
       </div>
     </div>

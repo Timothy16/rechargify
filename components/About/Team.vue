@@ -18,14 +18,14 @@
 
       <!-- Team Image -->
       <div class="relative">
-        <img 
-          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1400&h=600" 
+        <NuxtImg 
+          src="https://res.cloudinary.com/dtmt0vas4/image/upload/v1769595423/ChatGPT_Image_Jan_28_2026_11_13_00_AM_s5kxft.png" 
           alt="Rechargify team collaborating on financial solutions" 
           class="rounded-3xl shadow-2xl border border-gray-100 w-full h-auto object-cover"
           loading="lazy"
           width="1400"
           height="600"
-        >
+        />
       </div>
     </div>
   </section>

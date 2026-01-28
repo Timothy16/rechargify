@@ -95,14 +95,14 @@
           class="relative"
           :class="{ 'animate-fade-in-up animation-delay-200': isVisible }"
         >
-          <img 
+          <NuxtImg 
             src="https://res.cloudinary.com/dtmt0vas4/image/upload/v1769461839/ChatGPT_Image_Jan_26_2026_10_10_10_PM_zfpzdq.png" 
             alt="African woman using Rechargify mobile banking app on smartphone" 
             class="rounded-3xl shadow-2xl border border-gray-100 w-full h-auto object-cover"
             loading="eager"
             width="1200"
             height="800"
-          >
+          />
           
           <!-- Floating Stats Card -->
           <div 

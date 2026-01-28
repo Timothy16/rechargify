@@ -40,14 +40,14 @@
 
         <!-- Right Image -->
         <div class="relative">
-          <img 
+          <NuxtImg 
             src="https://res.cloudinary.com/dtmt0vas4/image/upload/v1769461164/ChatGPT_Image_Jan_26_2026_09_58_24_PM_m4l0np.png" 
             alt="African professional using Rechargify services confidently" 
             class="rounded-3xl shadow-2xl w-full h-auto object-cover"
             loading="lazy"
             width="800"
             height="1000"
-          >
+          />
         </div>
       </div>
     </div>

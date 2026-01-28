@@ -14,14 +14,14 @@
 
         <!-- Image -->
         <div class="rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20 mb-10">
-          <img 
-            src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800&h=1000" 
+          <NuxtImg 
+            src="https://res.cloudinary.com/dtmt0vas4/image/upload/v1769592381/Gemini_Generated_Image_6eg0wh6eg0wh6eg0_a7lrbg.png" 
             alt="African professional using secure Rechargify banking" 
             class="w-full h-auto object-cover"
             loading="eager"
             width="800"
             height="1000"
-          >
+          />
         </div>
 
         <!-- Stats -->

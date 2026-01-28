@@ -6,7 +6,7 @@
         
         <!-- Image -->
         <div class="relative">
-          <img 
+          <NuxtImg 
             src="https://res.cloudinary.com/dtmt0vas4/image/upload/v1769444452/ChatGPT_Image_Jan_26_2026_05_13_10_PM_ety7fa.png"
             alt="African fintech team collaborating"
             class="relative rounded-3xl shadow-2xl border border-gray-100 w-full h-auto object-cover"

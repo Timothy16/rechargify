@@ -5,6 +5,24 @@ export default defineNuxtConfig({
    modules: [
     '@pinia/nuxt',
     '@nuxtjs/tailwindcss',
-     '@nuxt/fonts',
+    '@nuxt/fonts',
+    '@nuxt/image'
   ],
+  app: {
+    head: {
+      title: 'MySchool Academy',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      ],
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/x-icon',
+          href: '/favicon.png'
+        },
+        
+      ]
+    }
+  },
 })
