@@ -65,7 +65,8 @@ import { CircleCheckBig } from 'lucide-vue-next'
 
 // Set layout
 definePageMeta({
-  layout: 'dashboard'
+  layout: 'dashboard',
+  middleware: 'auth'
 })
 
 // User data

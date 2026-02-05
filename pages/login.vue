@@ -73,6 +73,24 @@
           </p>
         </div>
 
+        <!-- Error Message -->
+        <div v-if="errorMessage" class="mb-5 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <p class="text-sm text-red-800">{{ errorMessage }}</p>
+          <button 
+            v-if="showResendLink"
+            @click="resendVerification"
+            :disabled="isResending"
+            class="text-sm text-[#0066FF] font-semibold hover:underline mt-2"
+          >
+            {{ isResending ? 'Sending...' : 'Resend verification email' }}
+          </button>
+        </div>
+
+        <!-- Success Message -->
+        <div v-if="successMessage" class="mb-5 p-4 bg-green-50 border border-green-200 rounded-lg">
+          <p class="text-sm text-green-800">{{ successMessage }}</p>
+        </div>
+
         <!-- Login Form -->
         <form @submit.prevent="handleLogin" class="space-y-5">
           
@@ -145,10 +163,11 @@
           <!-- Submit Button -->
           <button 
             type="submit"
-            class="inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.98] bg-[#0066FF] text-white hover:bg-[#0052CC] focus:ring-[#0066FF] shadow-sm hover:shadow-md h-14 px-8 text-lg w-full group"
+            :disabled="isLoading"
+            class="inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.98] bg-[#0066FF] text-white hover:bg-[#0052CC] focus:ring-[#0066FF] shadow-sm hover:shadow-md h-14 px-8 text-lg w-full group disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Log In
-            <ArrowRight :size="20" class="ml-2 group-hover:translate-x-1 transition-transform" />
+            <span v-if="!isLoading">Log In</span>
+            <span v-else>Logging in...</span>
           </button>
         </form>
 
@@ -183,13 +202,21 @@
 </template>
 
 <script setup>
-import { Wallet, Shield, Lock, Eye, EyeOff, ArrowRight } from 'lucide-vue-next'
+import { Wallet, Shield, Lock, Eye, EyeOff } from 'lucide-vue-next'
+import { useAuthStore } from '~/stores/auth'
 
 definePageMeta({
   layout: false
 })
 
+const authStore = useAuthStore()
 const showPassword = ref(false)
+const isLoading = ref(false)
+const isResending = ref(false)
+const errorMessage = ref('')
+const successMessage = ref('')
+const showResendLink = ref(false)
+
 const formData = ref({
   email: '',
   password: '',
@@ -200,22 +227,56 @@ const togglePassword = () => {
   showPassword.value = !showPassword.value
 }
 
-const handleLogin = () => {
-  console.log('Login submitted:', formData.value)
-  // Add login logic here
+const handleLogin = async () => {
+  isLoading.value = true
+  errorMessage.value = ''
+  successMessage.value = ''
+  showResendLink.value = false
+
+  const result = await authStore.login(formData.value)
+  
+  isLoading.value = false
+
+  if (result.success) {
+    navigateTo('/dashboard')
+  } else {
+    errorMessage.value = result.error
+    
+    // Show resend link if email not verified
+    if (result.error.includes('verify your email')) {
+      showResendLink.value = true
+    }
+  }
 }
 
-// SEO Configuration
+const resendVerification = async () => {
+  isResending.value = true
+  errorMessage.value = ''
+  successMessage.value = ''
+
+  try {
+    const response = await $fetch('/api/auth/resend-verification', {
+      method: 'POST',
+      body: { email: formData.value.email }
+    })
+
+    if (response.success) {
+      successMessage.value = 'Verification email sent! Please check your inbox.'
+      showResendLink.value = false
+    }
+  } catch (error) {
+    errorMessage.value = error.data?.message || 'Failed to resend verification email'
+  } finally {
+    isResending.value = false
+  }
+}
+
 useHead({
   title: 'Login - Rechargify | Access Your Account',
   meta: [
     {
       name: 'description',
       content: 'Log in to your Rechargify account. Access your digital wallet, manage transactions, and control your finances securely.'
-    },
-    {
-      name: 'robots',
-      content: 'noindex, nofollow'
     }
   ]
 })

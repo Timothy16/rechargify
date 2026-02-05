@@ -38,7 +38,7 @@ const quickActions = ref([
     title: 'Pay Bills',
     icon: Zap,
     bgGradient: 'bg-gradient-to-br from-purple-500 to-purple-600',
-    route: '/services-app/bills'
+    route: '/services-app/electricity'
   },
   {
     title: 'Buy Airtime',

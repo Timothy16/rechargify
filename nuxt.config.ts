@@ -8,6 +8,11 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/image'
   ],
+  fonts: {
+    families: [
+      { name: 'Inter', provider: 'google', weights: [400, 500, 600, 700] }
+    ]
+  },
   app: {
     head: {
       title: 'Rechargify',
@@ -24,5 +29,17 @@ export default defineNuxtConfig({
         
       ]
     }
+  },
+  runtimeConfig: {
+    mongodbUri: process.env.MONGODB_URI,
+    resendApiKey: process.env.RESEND_API_KEY,
+    resendFrom: process.env.RESEND_FROM,
+
+    public: {
+      appUrl: process.env.APP_URL,
+    },
+  },
+   build: {
+    transpile: ['vue-toastification'],
   },
 })
