@@ -48,7 +48,7 @@ useHead({
     },
     {
       property: 'og:image',
-      content: 'https://Rechargify.com/og-image.jpg'
+       content : 'https://res.cloudinary.com/dtmt0vas4/image/upload/v1769461839/ChatGPT_Image_Jan_26_2026_10_10_10_PM_zfpzdq.png'
     },
     // Twitter
     {
@@ -69,7 +69,8 @@ useHead({
     },
     {
       name: 'twitter:image',
-      content: 'https://Rechargify.com/twitter-image.jpg'
+      // content: 'https://Rechargify.com/twitter-image.jpg'
+      content : 'https://res.cloudinary.com/dtmt0vas4/image/upload/v1769461839/ChatGPT_Image_Jan_26_2026_10_10_10_PM_zfpzdq.png'
     },
     // Additional SEO tags
     {
@@ -115,7 +116,7 @@ const structuredData = {
       name: 'Rechargify',
       description: 'Modern digital banking solutions for Africa',
       url: 'https://Rechargify.com',
-      logo: 'https://Rechargify.com/logo.png',
+      logo: 'https://Rechargify.com/favicon.png',
       contactPoint: {
         '@type': 'ContactPoint',
         telephone: '+234-XXX-XXX-XXXX',
@@ -143,7 +144,7 @@ const structuredData = {
     {
       '@type': 'FinancialService',
       name: 'Rechargify',
-      image: 'https://Rechargify.com/logo.png',
+      image: 'https://Rechargify.com/favicon.png',
       description: 'Digital banking platform offering wallet services, virtual cards, bill payments, and international transfers across Africa.',
       address: {
         '@type': 'PostalAddress',
