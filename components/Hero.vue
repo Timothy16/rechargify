@@ -53,12 +53,12 @@
               Create Free Account
               <ArrowRight :size="20" class="ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button 
+            <!-- <button 
               class="w-full sm:w-auto inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.98] bg-transparent border-2 border-[#0066FF] text-[#0066FF] hover:bg-blue-50 focus:ring-[#0066FF] h-14 px-8 text-lg"
               @click="handleWatchDemo"
             >
               Watch Demo
-            </button>
+            </button> -->
           </div>
 
           <!-- Trust Indicators -->
