@@ -10,6 +10,10 @@
       <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm flex flex-col sm:flex-row items-center gap-6">
         <div class="relative group">
           <div class="w-24 h-24 rounded-full overflow-hidden bg-gray-100 border-4 border-white shadow-md">
+            <!-- Loading Spinner Overlay -->
+    <div v-if="isUploadingAvatar" class="absolute inset-0 bg-black/50 flex items-center justify-center z-10">
+      <Loader2 :size="32" class="text-white animate-spin" />
+    </div>
             <img v-if="profileData.avatar" :src="profileData.avatar" class="w-full h-full object-cover" />
             <div v-else class="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 text-white text-3xl font-bold">
               {{ userInitials }}
@@ -111,7 +115,7 @@
 <script setup>
 import { 
   Camera, ShieldCheck, User as UserIcon, Lock, 
-  Key, ChevronRight, LogOut, AlertCircle 
+  Key, ChevronRight, LogOut, AlertCircle, Loader2 
 } from 'lucide-vue-next'
 import { useAuthStore } from '~/stores/auth'
 import ChangePasswordModal from '~/components/ChangePasswordModal.vue'

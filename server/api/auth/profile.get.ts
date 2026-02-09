@@ -1,8 +1,10 @@
 // server/api/auth/profile.get.ts
 import { RechargifyUser } from '~/models/RechargifyUser.model';
 import { createError } from 'h3';
+import { ensureConnection } from '~/utils/mongodb';
 
 export default defineEventHandler(async (event) => {
+    await ensureConnection();
   try {
     const sessionCookie = getCookie(event, 'rechargify_user_session');
     if (!sessionCookie) {

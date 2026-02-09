@@ -1,9 +1,11 @@
 // server/api/auth/change-password.post.ts
 import { RechargifyUser } from '~/models/RechargifyUser.model';
 import { createError } from 'h3';
+import { ensureConnection } from '~/utils/mongodb';
 
 export default defineEventHandler(async (event) => {
   try {
+     await ensureConnection();
     const sessionCookie = getCookie(event, 'rechargify_user_session');
     if (!sessionCookie) {
       throw createError({

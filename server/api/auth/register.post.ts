@@ -2,9 +2,11 @@
 import { RechargifyUser } from '~/models/RechargifyUser.model';
 import { createError } from 'h3';
 import crypto from 'crypto';
+import { ensureConnection } from '~/utils/mongodb';
 
 export default defineEventHandler(async (event) => {
   try {
+    await ensureConnection();
     const body = await readBody(event);
     const { firstName, lastName, email, password } = body;
 

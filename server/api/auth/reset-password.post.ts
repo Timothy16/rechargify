@@ -1,9 +1,10 @@
 // server/api/auth/reset-password.post.ts
 import { RechargifyUser } from '~/models/RechargifyUser.model';
 import { createError } from 'h3';
-
+import { ensureConnection } from '~/utils/mongodb';
 export default defineEventHandler(async (event) => {
   try {
+    await ensureConnection();
     const { token, password } = await readBody(event);
 
     if (!token || !password) {
