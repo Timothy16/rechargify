@@ -134,15 +134,8 @@
             </div>
 
             <!-- Remember Me & Forgot Password -->
-            <div class="flex items-center justify-between mt-2">
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input 
-                  v-model="formData.rememberMe"
-                  type="checkbox"
-                  class="w-4 h-4 text-[#0066FF] border-gray-300 rounded focus:ring-[#0066FF]"
-                >
-                <span class="text-sm text-gray-600">Remember me</span>
-              </label>
+            <div class="flex items-center justify-end mt-2">
+              
               <NuxtLink 
                 to="/forgot-password" 
                 class="text-sm text-[#0066FF] font-semibold hover:underline"

@@ -70,11 +70,12 @@ const securityFeatures = [
     description: 'Real-time monitoring & alerts',
     icon: Shield
   },
-  {
-    title: 'Global Compliance',
-    description: 'Licensed & regulated by CBN',
-    icon: Globe
-  },
+ {
+  title: 'Data Privacy',
+  description: 'Your data is encrypted, isolated, and never shared',
+  icon: Globe
+},
+
   {
     title: 'Insured Funds',
     description: 'Your money is protected',

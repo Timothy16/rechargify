@@ -41,7 +41,7 @@
 
           <!-- Subtitle -->
           <p class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-            Send money, pay bills, and manage your finances with the speed of a tech startup and the security of a bank.
+            Pay bills, and manage your finances with the speed of a tech startup and the security of a bank.
           </p>
 
           <!-- CTA Buttons -->

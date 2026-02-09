@@ -42,23 +42,52 @@
       </div>
 
       <div class="space-y-4">
-        <h2 class="text-xl font-bold text-gray-900">Recent Activity</h2>
-        <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden divide-y divide-gray-100">
-          <div 
-            v-for="(activity, index) in recentActivities" 
-            :key="index"
-            class="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors cursor-pointer"
-          >
-            <div>
-              <div class="font-semibold text-gray-900">{{ activity.name }}</div>
-              <div class="text-sm text-gray-500">{{ activity.time }}</div>
-            </div>
-            <div class="font-bold text-gray-900">
-              ₦{{ activity.amount }}
-            </div>
-          </div>
+  <h2 class="text-xl font-bold text-gray-900">Recent Activity</h2>
+
+  <!-- EMPTY STATE -->
+  <div
+    v-if="!recentActivities.length"
+    class="bg-white rounded-xl border border-dashed border-gray-200 p-10 text-center"
+  >
+    <div class="mx-auto mb-4 w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
+      <TrendingUp class="w-5 h-5 text-gray-400" />
+    </div>
+
+    <h3 class="font-semibold text-gray-900 mb-1">
+      No recent activity
+    </h3>
+
+    <p class="text-sm text-gray-500">
+      Your recent service transactions will appear here
+    </p>
+  </div>
+
+  <!-- DATA STATE -->
+  <div
+    v-else
+    class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden divide-y divide-gray-100"
+  >
+    <div 
+      v-for="(activity, index) in recentActivities" 
+      :key="index"
+      class="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors cursor-pointer"
+    >
+      <div>
+        <div class="font-semibold text-gray-900">
+          {{ activity.name }}
+        </div>
+        <div class="text-sm text-gray-500">
+          {{ activity.time }}
         </div>
       </div>
+
+      <div class="font-bold text-gray-900">
+        ₦{{ activity.amount }}
+      </div>
+    </div>
+  </div>
+</div>
+
 
     </div>
   </main>
@@ -113,9 +142,6 @@ const services = [
   }
 ]
 
-const recentActivities = [
-  { name: 'MTN Airtime', time: 'Today', amount: '1,000' },
-  { name: 'Airtel Data 10GB', time: 'Yesterday', amount: '2,000' },
-  { name: 'EKEDC Prepaid', time: '2 days ago', amount: '5,000' }
-]
+const recentActivities = []
+
 </script>

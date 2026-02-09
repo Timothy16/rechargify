@@ -126,7 +126,7 @@
                     <div>
                       <h3 class="font-semibold text-gray-900 mb-2">Start Spending</h3>
                       <p class="text-gray-600">
-                        Use your wallet balance to pay bills, buy airtime, send money, or make purchases instantly.
+                        Use your wallet balance to pay bills, buy airtime, or make purchases instantly.
                       </p>
                     </div>
                   </div>
@@ -218,9 +218,9 @@ definePageMeta({
 })
 
 // Account data
-const bankName = ref('Wema Bank')
-const accountNumber = ref('7823456789')
-const accountName = ref('John Doe - Rechargify')
+const bankName = ref('******')
+const accountNumber = ref('**********')
+const accountName = ref('***** ****8')
 const copied = ref(false)
 
 const benefits = ref([

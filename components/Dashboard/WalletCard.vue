@@ -73,7 +73,7 @@
 <script setup>
 import { Wallet, TrendingUp, Plus } from 'lucide-vue-next'
 
-const balance = ref(254350.00)
+const balance = ref(0.00)
 
 const formatAmount = (amount) => {
   return new Intl.NumberFormat('en-NG', {

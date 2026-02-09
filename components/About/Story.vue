@@ -42,13 +42,13 @@
               In 2021, we noticed a critical gap in the African financial ecosystem. Traditional banks were too slow and bureaucratic, while existing fintech solutions were either too complex or lacked the trust factor needed for widespread adoption.
             </p>
             <p>
-              Millions of Africans were being left behind—unable to access basic financial services, send money affordably, or participate in the digital economy. We knew something had to change.
+              Millions of Africans were being left behind—unable to access basic financial services,  or participate in the digital economy. We knew something had to change.
             </p>
             <p>
               We set out to build a platform that combines the trust and security of a traditional bank with the speed and innovation of a modern tech company. A place where anyone can manage their money without headaches, hidden fees, or unnecessary complexity.
             </p>
             <p class="font-semibold text-gray-900">
-              Today, Rechargify serves over 50,000 customers across 12 African countries, helping them pay bills, send money, grow their businesses, and achieve financial freedom.
+              Today, Rechargify serves over 50,000 customers across 12 African countries, helping them pay bills, grow their businesses, and achieve financial freedom.
             </p>
           </div>
         </div>

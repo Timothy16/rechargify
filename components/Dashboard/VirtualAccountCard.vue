@@ -90,9 +90,9 @@
 <script setup>
 import { CreditCard, Building, Copy, Check, Info } from 'lucide-vue-next'
 
-const bankName = ref('Wema Bank')
-const accountNumber = ref('7823456789')
-const accountName = ref('John Doe')
+const bankName = ref('*********')
+const accountNumber = ref('***********')
+const accountName = ref('***** ****')
 const copied = ref(false)
 
 const copyAccountNumber = async () => {

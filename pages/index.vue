@@ -23,11 +23,11 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'Send money, pay bills, and manage your finances with Rechargify. Trusted by 50,000+ Africans. Fast, secure, and reliable digital banking solutions for everyone.'
+      content: 'Pay bills, and manage your finances with Rechargify. Trusted by 50,000+ Africans. Fast, secure, and reliable digital banking solutions for everyone.'
     },
     {
       name: 'keywords',
-      content: 'digital banking africa, mobile money, send money africa, pay bills online, virtual cards, fintech africa, online banking nigeria, money transfer'
+      content: 'digital banking africa, mobile money, pay bills online, virtual cards, fintech africa, online banking'
     },
     // Open Graph / Facebook
     {
@@ -44,7 +44,7 @@ useHead({
     },
     {
       property: 'og:description',
-      content: 'Send money, pay bills, and manage your finances with Rechargify. Trusted by 50,000+ Africans.'
+      content: 'Pay bills, and manage your finances with Rechargify. Trusted by 50,000+ Africans.'
     },
     {
       property: 'og:image',
@@ -65,7 +65,7 @@ useHead({
     },
     {
       name: 'twitter:description',
-      content: 'Send money, pay bills, and manage your finances with Rechargify. Trusted by 50,000+ Africans.'
+      content: 'Pay bills, and manage your finances with Rechargify. Trusted by 50,000+ Africans.'
     },
     {
       name: 'twitter:image',

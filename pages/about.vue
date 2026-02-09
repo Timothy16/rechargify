@@ -10,7 +10,7 @@
       <AboutMission />
       <AboutValues />
       <AboutTeam />
-      <AboutTrust />
+      
     </main>
     
     <Footer />

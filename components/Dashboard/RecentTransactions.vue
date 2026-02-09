@@ -3,43 +3,76 @@
   <div>
     <!-- Header -->
     <div class="flex items-center justify-between mb-4">
-      <h2 class="text-xl font-bold text-gray-900">Recent Transactions</h2>
-      <NuxtLink 
+      <h2 class="text-xl font-bold text-gray-900">
+        Recent Transactions
+      </h2>
+
+      <NuxtLink
+        v-if="transactions.length"
         to="/transactions"
-        class="inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] bg-transparent text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:ring-gray-200 h-9 px-3 text-sm"
+        class="inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 bg-transparent text-gray-600 hover:bg-gray-100 h-9 px-3 text-sm"
       >
         View All
       </NuxtLink>
     </div>
 
-    <!-- Transactions List -->
-    <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden divide-y divide-gray-100">
-      <div 
-        v-for="(transaction, index) in transactions" 
+    <!-- EMPTY STATE -->
+    <div
+      v-if="!transactions.length"
+      class="bg-white rounded-xl border border-dashed border-gray-200 p-10 text-center"
+    >
+      <div
+        class="mx-auto mb-4 w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center"
+      >
+        <ArrowDownLeft class="text-gray-400" :size="20" />
+      </div>
+
+      <h3 class="font-semibold text-gray-900 mb-1">
+        No transactions yet
+      </h3>
+
+      <p class="text-sm text-gray-500 mb-6">
+        Your recent transactions will appear here
+      </p>
+
+      <NuxtLink
+        to="/fund-wallet"
+        class="inline-flex items-center justify-center rounded-lg bg-gray-900 text-white font-medium h-10 px-4 text-sm hover:bg-gray-800 transition"
+      >
+        Fund Wallet
+      </NuxtLink>
+    </div>
+
+    <!-- TRANSACTIONS LIST -->
+    <div
+      v-else
+      class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden divide-y divide-gray-100"
+    >
+      <div
+        v-for="(transaction, index) in transactions"
         :key="index"
         class="p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-        :style="`opacity: 1; transform: none;`"
         @click="handleTransactionClick(transaction)"
       >
         <div class="flex items-center gap-4">
           <!-- Icon -->
-          <div 
+          <div
             class="w-12 h-12 rounded-xl flex items-center justify-center"
             :class="transaction.type === 'credit' ? 'bg-green-50' : 'bg-red-50'"
           >
-            <ArrowDownLeft 
+            <ArrowDownLeft
               v-if="transaction.type === 'credit'"
-              :size="20" 
-              class="text-green-600" 
+              :size="20"
+              class="text-green-600"
             />
-            <ArrowUpRight 
+            <ArrowUpRight
               v-else
-              :size="20" 
-              class="text-red-600" 
+              :size="20"
+              class="text-red-600"
             />
           </div>
 
-          <!-- Transaction Details -->
+          <!-- Details -->
           <div class="flex-1 min-w-0">
             <div class="font-semibold text-gray-900 mb-1">
               {{ transaction.title }}
@@ -51,13 +84,14 @@
 
           <!-- Amount & Status -->
           <div class="text-right">
-            <div 
+            <div
               class="font-bold mb-1"
               :class="transaction.type === 'credit' ? 'text-green-600' : 'text-gray-900'"
             >
               {{ transaction.type === 'credit' ? '+' : '-' }}₦{{ formatAmount(transaction.amount) }}
             </div>
-            <span 
+
+            <span
               class="inline-flex items-center rounded-full border font-medium px-2 py-0.5 text-xs"
               :class="getStatusClass(transaction.status)"
             >
@@ -75,48 +109,8 @@ import { ArrowDownLeft, ArrowUpRight } from 'lucide-vue-next'
 
 const router = useRouter()
 
-const transactions = ref([
-  {
-    title: 'Wallet Funding',
-    date: 'Today, 2:30 PM',
-    amount: 50000,
-    type: 'credit',
-    status: 'success',
-    id: 'TXN001'
-  },
-  {
-    title: 'Airtime Purchase - MTN',
-    date: 'Today, 1:15 PM',
-    amount: 1000,
-    type: 'debit',
-    status: 'success',
-    id: 'TXN002'
-  },
-  {
-    title: 'Electricity Bill - EKEDC',
-    date: 'Yesterday, 6:45 PM',
-    amount: 5000,
-    type: 'debit',
-    status: 'success',
-    id: 'TXN003'
-  },
-  {
-    title: 'Transfer from John',
-    date: 'Yesterday, 3:20 PM',
-    amount: 10000,
-    type: 'credit',
-    status: 'success',
-    id: 'TXN004'
-  },
-  {
-    title: 'Data Bundle - Airtel',
-    date: 'Yesterday, 12:00 PM',
-    amount: 2000,
-    type: 'debit',
-    status: 'pending',
-    id: 'TXN005'
-  }
-])
+// EMPTY ARRAY → EMPTY STATE ONLY
+const transactions = ref([])
 
 const formatAmount = (amount) => {
   return new Intl.NumberFormat('en-NG', {

@@ -28,19 +28,19 @@
 const stats = ref([
   {
     label: 'Total Income',
-    amount: 63500,
-    change: '+12.5%',
+    amount: 0,
+    change: '+0%',
     changeColor: 'text-green-600'
   },
   {
     label: 'Total Expenses',
-    amount: 66500,
-    change: '-8.2%',
+    amount: 0,
+    change: '0%',
     changeColor: 'text-red-600'
   },
   {
     label: 'Pending',
-    amount: 2000,
+    amount: 0,
     change: '1 transaction',
     changeColor: 'text-yellow-600'
   }
