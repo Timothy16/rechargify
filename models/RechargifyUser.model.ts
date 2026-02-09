@@ -25,6 +25,10 @@ const RechargifyUserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  avatar: {
+    type: String,
+    default: null
+  },
   isEmailVerified: {
     type: Boolean,
     default: false

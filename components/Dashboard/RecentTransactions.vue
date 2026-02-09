@@ -36,7 +36,7 @@
       </p>
 
       <NuxtLink
-        to="/fund-wallet"
+        to="/wallet"
         class="inline-flex items-center justify-center rounded-lg bg-gray-900 text-white font-medium h-10 px-4 text-sm hover:bg-gray-800 transition"
       >
         Fund Wallet

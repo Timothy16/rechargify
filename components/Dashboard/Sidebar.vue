@@ -46,9 +46,22 @@
         to="/profile" 
         class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
       >
-        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-          <span class="text-white font-semibold text-sm">{{ userInitials }}</span>
+        <!-- Avatar or Initials -->
+        <div class="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center">
+          <img 
+            v-if="userAvatar" 
+            :src="userAvatar" 
+            :alt="userName"
+            class="w-full h-full object-cover" 
+          />
+          <div 
+            v-else 
+            class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center"
+          >
+            <span class="text-white font-semibold text-sm">{{ userInitials }}</span>
+          </div>
         </div>
+
         <div class="flex-1 min-w-0">
           <div class="text-sm font-semibold text-gray-900 truncate">
             {{ userName }}
@@ -84,10 +97,12 @@ import {
   LogOut 
 } from 'lucide-vue-next'
 import { useAuthStore } from '~/stores/auth'
+import { useToast } from 'vue-toastification';
 
 const route = useRoute()
 const router = useRouter()
 const authStore = useAuthStore()
+const toast = useToast()
 const isLoggingOut = ref(false)
 
 const mainNavItems = [
@@ -112,6 +127,10 @@ const userEmail = computed(() => {
   return authStore.user?.email || 'email@example.com'
 })
 
+const userAvatar = computed(() => {
+  return authStore.user?.avatar || null
+})
+
 const userInitials = computed(() => {
   if (!authStore.user) return 'U'
   const firstName = authStore.user.firstName || ''
@@ -129,9 +148,9 @@ const handleLogout = async () => {
   const success = await authStore.logout()
   
   if (success) {
+    toast.success('Logged out successfully')
     router.push('/login')
   } else {
-    // If logout fails, still redirect to login
     authStore.clearProfile()
     router.push('/login')
   }

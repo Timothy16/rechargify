@@ -39,8 +39,8 @@
             <DashboardRecentTransactions />
           </div>
 
-          <!-- Account Verified Banner (Optional - can be removed) -->
-          <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden p-6 bg-blue-50 border-blue-100">
+          <!-- Account Verified Banner -->
+          <div v-if="authStore.user?.isEmailVerified" class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden p-6 bg-blue-50 border-blue-100">
             <div class="flex items-start gap-4">
               <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <CircleCheckBig :size="20" class="text-[#0066FF]" />
@@ -54,6 +54,27 @@
             </div>
           </div>
 
+          <!-- Email Not Verified Banner -->
+          <div v-else class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden p-6 bg-yellow-50 border-yellow-100">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <AlertCircle :size="20" class="text-yellow-600" />
+              </div>
+              <div class="flex-1">
+                <h3 class="font-semibold text-gray-900 mb-1">Email Verification Required</h3>
+                <p class="text-gray-600 text-sm">
+                  Please verify your email address to unlock all features and higher transaction limits.
+                </p>
+              </div>
+              <button 
+                @click="resendVerification"
+                class="px-4 py-2 bg-yellow-600 text-white text-sm font-semibold rounded-lg hover:bg-yellow-700 transition"
+              >
+                Resend Email
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
     </main>
@@ -61,18 +82,37 @@
 </template>
 
 <script setup>
-import { CircleCheckBig } from 'lucide-vue-next'
+import { CircleCheckBig, AlertCircle } from 'lucide-vue-next'
+import { useAuthStore } from '~/stores/auth'
+import { useToast } from 'vue-toastification';
 
-// Set layout
 definePageMeta({
   layout: 'dashboard',
   middleware: 'auth'
 })
 
-// User data
-const userName = ref('John')
+const authStore = useAuthStore()
+const toast = useToast()
 
-// SEO Configuration for Dashboard
+const userName = computed(() => {
+  return authStore.user?.firstName || 'User'
+})
+
+const resendVerification = async () => {
+  try {
+    const response = await $fetch('/api/auth/resend-verification', {
+      method: 'POST',
+      body: { email: authStore.user?.email }
+    })
+
+    if (response.success) {
+      toast.success('Verification email sent! Please check your inbox.')
+    }
+  } catch (error) {
+    toast.error(error.data?.message || 'Failed to resend verification email')
+  }
+}
+
 useHead({
   title: 'Dashboard - Rechargify | Your Financial Overview',
   meta: [
@@ -82,7 +122,7 @@ useHead({
     },
     {
       name: 'robots',
-      content: 'noindex, nofollow' // Dashboard should not be indexed
+      content: 'noindex, nofollow'
     }
   ]
 })
