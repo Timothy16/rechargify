@@ -202,17 +202,7 @@
           />
         </div>
 
-        <!-- Stats Footer -->
-        <div class="flex items-center gap-6 text-white/80">
-          <div class="flex items-center gap-2">
-            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span class="text-sm">50K+ Active Users</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <Shield :size="16" />
-            <span class="text-sm">CBN Licensed</span>
-          </div>
-        </div>
+     
       </div>
     </div>
 

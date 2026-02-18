@@ -5,7 +5,7 @@
       <Wallet :size="20" />
       <span class="text-sm font-medium">Wallet Balance</span>
     </div>
-    <div class="text-3xl font-bold relative z-10">₦254,350.00</div>
+    <div class="text-3xl font-bold relative z-10">₦0.00</div>
   </div>
 </template>
 

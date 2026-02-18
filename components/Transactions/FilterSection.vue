@@ -50,7 +50,7 @@
             @change="handleFilterChange"
           >
             <option value="all">All Status</option>
-            <option value="success">Success</option>
+            <option value="completed">Completed</option>
             <option value="pending">Pending</option>
             <option value="failed">Failed</option>
           </select>

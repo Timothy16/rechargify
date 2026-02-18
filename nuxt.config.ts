@@ -34,7 +34,10 @@ export default defineNuxtConfig({
     mongodbUri: process.env.MONGODB_URI,
     resendApiKey: process.env.RESEND_API_KEY,
     resendFrom: process.env.RESEND_FROM,
-
+    monnifyApiKey: process.env.MONNIFY_API_KEY,
+    monnifySecretKey: process.env.MONNIFY_SECRET_KEY,
+    monnifyContractCode: process.env.MONNIFY_CONTRACT_CODE,
+    monnifyBaseUrl: process.env.MONNIFY_BASE_URL,
     public: {
       appUrl: process.env.APP_URL,
     },

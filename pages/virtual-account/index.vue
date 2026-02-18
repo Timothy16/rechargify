@@ -2,206 +2,219 @@
 <template>
   <div>
     <main class="p-4 sm:p-6 lg:p-8">
-      <div style="opacity: 1; transform: none;">
-        <div class="max-w-5xl mx-auto space-y-8">
-          
-          <!-- Page Header -->
-          <div>
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">
-              Virtual Account
-            </h1>
-            <p class="text-gray-600">
-              Your dedicated account number for receiving payments
+      <div class="max-w-5xl mx-auto space-y-8">
+
+        <!-- Page Header -->
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900 mb-2">Virtual Account</h1>
+          <p class="text-gray-600">Your dedicated account number for receiving payments</p>
+        </div>
+
+        <!-- Loading State -->
+        <div v-if="isLoading" class="flex items-center justify-center py-20">
+          <Loader2 :size="40" class="animate-spin text-[#0066FF]" />
+        </div>
+
+        <!-- No Virtual Account - BVN Form -->
+        <div v-else-if="!hasAccount" class="max-w-md mx-auto">
+          <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 text-center">
+            <div class="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+              <CreditCard :size="36" class="text-[#0066FF]" />
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">Create Virtual Account</h2>
+            <p class="text-gray-500 mb-8">
+              Get a dedicated bank account number to fund your Rechargify wallet instantly.
             </p>
+
+            <form @submit.prevent="handleCreateAccount" class="space-y-5 text-left">
+
+              <!-- Error -->
+              <div v-if="errorMessage" class="p-3 bg-red-50 border border-red-200 rounded-lg">
+                <p class="text-sm text-red-800">{{ errorMessage }}</p>
+              </div>
+
+              <!-- BVN Field -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1.5">
+                  Bank Verification Number (BVN)
+                </label>
+                <input
+                  v-model="bvn"
+                  type="text"
+                  maxlength="11"
+                  placeholder="Enter your 11-digit BVN"
+                  required
+                  class="block w-full rounded-lg border border-gray-200 px-4 py-3 text-gray-900 shadow-sm transition-colors placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0066FF]/20 focus:border-[#0066FF] hover:border-gray-300"
+                />
+                <p class="text-xs text-gray-500 mt-1">Dial *565*0# to get your BVN</p>
+              </div>
+
+              <!-- NIN Field (NEW - add after BVN field) -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1.5">
+                  National Identification Number (NIN)
+                </label>
+                <input
+                  v-model="nin"
+                  type="text"
+                  maxlength="11"
+                  placeholder="Enter your 11-digit NIN"
+                  required
+                  class="block w-full rounded-lg border border-gray-200 px-4 py-3 text-gray-900 shadow-sm transition-colors placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0066FF]/20 focus:border-[#0066FF] hover:border-gray-300"
+                />
+                <p class="text-xs text-gray-500 mt-1">Dial *346# to get your NIN</p>
+              </div>
+
+              <!-- Security Note -->
+              <div class="flex items-start gap-3 p-3 bg-blue-50 rounded-lg border border-blue-100">
+                <ShieldCheck :size="18" class="text-[#0066FF] flex-shrink-0 mt-0.5" />
+                <p class="text-xs text-gray-600">
+                  Your BVN is only used for identity verification and is never stored in plain text. It's fully encrypted and secure.
+                </p>
+              </div>
+
+              <button
+                type="submit"
+                :disabled="isCreating || bvn.length !== 11 || nin.length !== 11"  
+                class="w-full bg-[#0066FF] text-white py-3 rounded-lg font-semibold hover:bg-[#0052CC] transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              >
+                <Loader2 v-if="isCreating" :size="20" class="animate-spin" />
+                {{ isCreating ? 'Creating Account...' : 'Create Virtual Account' }}
+              </button>
+            </form>
           </div>
+        </div>
 
-          <!-- Main Grid Layout -->
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
-            <!-- Left Column - Main Content -->
-            <div class="lg:col-span-2 space-y-6">
-              
-              <!-- Virtual Account Card -->
-              <div style="opacity: 1; transform: none;">
-                <div class="bg-[#0066FF] rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden shadow-lg">
-                  <!-- Background Pattern -->
-                  <div class="absolute inset-0 opacity-10">
-                    <!-- Wave Patterns -->
-                    <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                      <defs>
-                        <pattern id="waves-page" width="100" height="100" patternUnits="userSpaceOnUse">
-                          <path d="M0 50 Q 25 30, 50 50 T 100 50" fill="none" stroke="white" stroke-width="2"/>
-                          <path d="M0 70 Q 25 50, 50 70 T 100 70" fill="none" stroke="white" stroke-width="1.5"/>
-                        </pattern>
-                      </defs>
-                      <rect width="100%" height="100%" fill="url(#waves-page)" />
-                    </svg>
-                    
-                    <!-- Decorative Shapes -->
-                    <div class="absolute top-0 right-0 w-64 h-64 border-4 border-white rounded-full -translate-y-32 translate-x-32"></div>
-                    <div class="absolute bottom-0 left-0 w-64 h-64 border-4 border-white rounded-full translate-y-32 -translate-x-32"></div>
-                  </div>
+        <!-- Has Virtual Account -->
+        <div v-else class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-                  <!-- Content -->
-                  <div class="relative z-10">
-                    <!-- Header -->
-                    <div class="flex items-center justify-between mb-6 sm:mb-8">
-                      <div class="flex items-center gap-2 sm:gap-3">
-                        <Building2 :size="20" class="text-blue-200 sm:w-6 sm:h-6" />
-                        <span class="text-blue-100 font-medium text-sm sm:text-base">Virtual Account</span>
-                      </div>
-                      <div class="px-2.5 sm:px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs sm:text-sm font-medium">
-                        Active
-                      </div>
-                    </div>
+          <!-- Left Column -->
+          <div class="lg:col-span-2 space-y-6">
 
-                    <!-- Account Details -->
-                    <div class="space-y-5 sm:space-y-6">
-                      <!-- Bank Name -->
-                      <div>
-                        <div class="text-xs sm:text-sm text-blue-100 mb-1.5 sm:mb-2">Bank Name</div>
-                        <div class="text-xl sm:text-2xl font-bold">{{ bankName }}</div>
-                      </div>
-
-                      <!-- Account Number with Copy -->
-                      <div>
-                        <div class="text-xs sm:text-sm text-blue-100 mb-1.5 sm:mb-2">Account Number</div>
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
-                          <div class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-wider break-all">{{ accountNumber }}</div>
-                          <button 
-                            @click="copyAccountNumber"
-                            class="inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] bg-white text-gray-900 hover:bg-gray-50 shadow-sm h-9 px-3 text-sm w-full sm:w-auto flex-shrink-0"
-                          >
-                            <Check v-if="copied" :size="16" class="mr-2" />
-                            <Copy v-else :size="16" class="mr-2" />
-                            {{ copied ? 'Copied' : 'Copy' }}
-                          </button>
-                        </div>
-                      </div>
-
-                      <!-- Account Name -->
-                      <div>
-                        <div class="text-xs sm:text-sm text-blue-100 mb-1.5 sm:mb-2">Account Name</div>
-                        <div class="text-base sm:text-lg md:text-xl font-semibold break-words">{{ accountName }}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <!-- Account Card -->
+            <div class="bg-[#0066FF] rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden shadow-lg">
+              <div class="absolute inset-0 opacity-10">
+                <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <pattern id="waves-page" width="100" height="100" patternUnits="userSpaceOnUse">
+                      <path d="M0 50 Q 25 30, 50 50 T 100 50" fill="none" stroke="white" stroke-width="2"/>
+                      <path d="M0 70 Q 25 50, 50 70 T 100 70" fill="none" stroke="white" stroke-width="1.5"/>
+                    </pattern>
+                  </defs>
+                  <rect width="100%" height="100%" fill="url(#waves-page)" />
+                </svg>
+                <div class="absolute top-0 right-0 w-64 h-64 border-4 border-white rounded-full -translate-y-32 translate-x-32"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 border-4 border-white rounded-full translate-y-32 -translate-x-32"></div>
               </div>
 
-              <!-- How to Use Section -->
-              <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden p-8">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">
-                  How to Use Your Virtual Account
-                </h2>
-                <div class="space-y-6">
-                  <div class="flex gap-4">
-                    <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-[#0066FF]">
-                      1
-                    </div>
-                    <div>
-                      <h3 class="font-semibold text-gray-900 mb-2">Share Your Account Details</h3>
-                      <p class="text-gray-600">
-                        Share your virtual account number with anyone who wants to send you money. They can transfer from any Nigerian bank.
-                      </p>
+              <div class="relative z-10">
+                <div class="flex items-center justify-between mb-6 sm:mb-8">
+                  <div class="flex items-center gap-2">
+                    <Building2 :size="20" class="text-blue-200" />
+                    <span class="text-blue-100 font-medium">Virtual Account</span>
+                  </div>
+                  <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium">Active</span>
+                </div>
+
+                <!-- Show first account by default, tab for multiple -->
+                <div v-if="selectedAccount" class="space-y-5">
+                  <div>
+                    <p class="text-blue-100 text-sm mb-1.5">Bank Name</p>
+                    <p class="text-2xl font-bold">{{ selectedAccount.bankName }}</p>
+                  </div>
+
+                  <div>
+                    <p class="text-blue-100 text-sm mb-1.5">Account Number</p>
+                    <div class="flex items-center gap-4">
+                      <p class="text-3xl font-bold tracking-wider">{{ selectedAccount.accountNumber }}</p>
+                      <button
+                        @click="copyAccountNumber(selectedAccount.accountNumber)"
+                        class="bg-white text-[#0066FF] px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-white/90 transition"
+                      >
+                        <Check v-if="copied" :size="16" />
+                        <Copy v-else :size="16" />
+                        {{ copied ? 'Copied' : 'Copy' }}
+                      </button>
                     </div>
                   </div>
 
-                  <div class="flex gap-4">
-                    <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-[#0066FF]">
-                      2
-                    </div>
-                    <div>
-                      <h3 class="font-semibold text-gray-900 mb-2">Receive Instant Credit</h3>
-                      <p class="text-gray-600">
-                        Once the transfer is made, your Rechargify wallet is credited instantly. No waiting, no delays.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex gap-4">
-                    <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-[#0066FF]">
-                      3
-                    </div>
-                    <div>
-                      <h3 class="font-semibold text-gray-900 mb-2">Start Spending</h3>
-                      <p class="text-gray-600">
-                        Use your wallet balance to pay bills, buy airtime, or make purchases instantly.
-                      </p>
-                    </div>
+                  <div>
+                    <p class="text-blue-100 text-sm mb-1.5">Account Name</p>
+                    <p class="text-xl font-semibold">{{ accountData.accountName }}</p>
                   </div>
                 </div>
-              </div>
 
-              <!-- Benefits Section -->
-              <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden p-8 bg-gradient-to-br from-green-50 to-blue-50 border-green-100">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">Benefits</h2>
-                <div class="space-y-3">
-                  <div 
-                    v-for="(benefit, index) in benefits" 
-                    :key="index"
-                    class="flex items-start gap-3"
+                <!-- Bank Tabs if multiple accounts -->
+                <div v-if="accountData.accounts.length > 1" class="flex gap-2 mt-6">
+                  <button
+                    v-for="(acc, i) in accountData.accounts"
+                    :key="i"
+                    @click="selectedAccountIndex = i"
+                    class="px-3 py-1.5 rounded-lg text-xs font-medium transition"
+                    :class="selectedAccountIndex === i ? 'bg-white text-[#0066FF]' : 'bg-white/20 text-white'"
                   >
-                    <CircleCheckBig :size="20" class="text-green-600 flex-shrink-0 mt-0.5" />
-                    <span class="text-gray-700">{{ benefit }}</span>
-                  </div>
+                    {{ acc.bankName }}
+                  </button>
                 </div>
               </div>
             </div>
 
-            <!-- Right Column - Sidebar -->
-            <div class="space-y-6">
-              
-              <!-- Quick Actions -->
-              <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden p-6">
-                <h3 class="font-semibold text-gray-900 mb-4">Quick Actions</h3>
-                <div class="space-y-3">
-                  <NuxtLink
-                    to="/wallet"
-                    class="inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] bg-transparent border border-[#0066FF] text-[#0066FF] hover:bg-[#0066FF]/5 focus:ring-[#0066FF] h-11 px-5 text-base w-full justify-between"
-                  >
-                    Wallet
-                    <ArrowRight :size="16" />
-                  </NuxtLink>
-                  
-                  <NuxtLink
-                    to="/transactions"
-                    class="inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] bg-transparent border border-[#0066FF] text-[#0066FF] hover:bg-[#0066FF]/5 focus:ring-[#0066FF] h-11 px-5 text-base w-full justify-between"
-                  >
-                    View Transactions
-                    <ArrowRight :size="16" />
-                  </NuxtLink>
-                </div>
-              </div>
-
-              <!-- Important Note -->
-              <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden p-6 bg-blue-50 border-blue-100">
-                <div class="flex items-start gap-3">
-                  <Info :size="20" class="text-[#0066FF] flex-shrink-0 mt-0.5" />
+            <!-- How to Use -->
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-8">
+              <h2 class="text-2xl font-bold text-gray-900 mb-6">How to Use Your Virtual Account</h2>
+              <div class="space-y-6">
+                <div v-for="(step, i) in steps" :key="i" class="flex gap-4">
+                  <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-[#0066FF]">
+                    {{ i + 1 }}
+                  </div>
                   <div>
-                    <h3 class="font-semibold text-gray-900 mb-2">Important Note</h3>
-                    <p class="text-sm text-gray-600">
-                      This account number is unique to you and can only be used to fund your Rechargify wallet. Do not use it for any other purpose.
-                    </p>
+                    <h3 class="font-semibold text-gray-900 mb-1">{{ step.title }}</h3>
+                    <p class="text-gray-600">{{ step.description }}</p>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
 
-              <!-- Need Help -->
-              <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden p-6">
-                <h3 class="font-semibold text-gray-900 mb-3">Need Help?</h3>
-                <p class="text-sm text-gray-600 mb-4">
-                  Having trouble with your virtual account? Our support team is here to help.
-                </p>
-                <NuxtLink
-                  to="/support"
-                  class="inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] bg-transparent border border-[#0066FF] text-[#0066FF] hover:bg-[#0066FF]/5 focus:ring-[#0066FF] h-9 px-3 text-sm w-full"
-                >
-                  Contact Support
+          <!-- Right Column -->
+          <div class="space-y-6">
+
+            <!-- Quick Actions -->
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+              <h3 class="font-semibold text-gray-900 mb-4">Quick Actions</h3>
+              <div class="space-y-3">
+                <NuxtLink to="/wallet" class="flex items-center justify-between w-full p-3 rounded-lg border border-gray-100 hover:border-[#0066FF]/30 hover:bg-blue-50/50 transition text-sm font-medium text-gray-700">
+                  Wallet <ArrowRight :size="16" />
+                </NuxtLink>
+                <NuxtLink to="/transactions" class="flex items-center justify-between w-full p-3 rounded-lg border border-gray-100 hover:border-[#0066FF]/30 hover:bg-blue-50/50 transition text-sm font-medium text-gray-700">
+                  View Transactions <ArrowRight :size="16" />
                 </NuxtLink>
               </div>
             </div>
 
+            <!-- Important Note -->
+            <div class="bg-blue-50 rounded-xl border border-blue-100 p-6">
+              <div class="flex items-start gap-3">
+                <Info :size="20" class="text-[#0066FF] flex-shrink-0 mt-0.5" />
+                <div>
+                  <h3 class="font-semibold text-gray-900 mb-2">Important Note</h3>
+                  <p class="text-sm text-gray-600">
+                    This account number is unique to you and can only be used to fund your Rechargify wallet.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Benefits -->
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+              <h3 class="font-semibold text-gray-900 mb-4">Benefits</h3>
+              <div class="space-y-3">
+                <div v-for="(benefit, i) in benefits" :key="i" class="flex items-start gap-2">
+                  <CircleCheckBig :size="18" class="text-green-600 flex-shrink-0 mt-0.5" />
+                  <span class="text-sm text-gray-600">{{ benefit }}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -210,52 +223,98 @@
 </template>
 
 <script setup>
-import { Building2, Copy, Check, CircleCheckBig, ArrowRight, Info } from 'lucide-vue-next'
+import { Building2, CreditCard, Copy, Check, CircleCheckBig, ArrowRight, Info, ShieldCheck, Loader2 } from 'lucide-vue-next'
+import { useToast } from 'vue-toastification';
 
-// Set layout
 definePageMeta({
-  layout: 'dashboard'
+  layout: 'dashboard',
+  middleware: 'auth'
 })
 
-// Account data
-const bankName = ref('******')
-const accountNumber = ref('**********')
-const accountName = ref('***** ****8')
+const toast = useToast()
+const isLoading = ref(true)
+const isCreating = ref(false)
+const hasAccount = ref(false)
+const accountData = ref(null)
+const bvn = ref('')
+const errorMessage = ref('')
 const copied = ref(false)
+const selectedAccountIndex = ref(0)
+const nin = ref('')
 
-const benefits = ref([
-  'Receive payments from anyone, anywhere in Nigeria',
-  'Instant credit to your Rechargify wallet',
+const selectedAccount = computed(() => {
+  if (!accountData.value?.accounts?.length) return null
+  return accountData.value.accounts[selectedAccountIndex.value]
+})
+
+const steps = [
+  { title: 'Share Your Account Details', description: 'Share your virtual account number with anyone who wants to send you money. They can transfer from any Nigerian bank.' },
+  { title: 'Receive Instant Credit', description: 'Once the transfer is made, your Rechargify wallet is credited instantly. No waiting, no delays.' },
+  { title: 'Start Spending', description: 'Use your wallet balance to pay bills, buy airtime, or make purchases instantly.' }
+]
+
+const benefits = [
+  'Receive payments from anyone in Nigeria',
+  'Instant credit to your wallet',
   'No transaction fees for incoming transfers',
   'Works with all Nigerian banks',
-  'Available 24/7, including weekends'
-])
+  'Available 24/7'
+]
 
-// Copy account number
-const copyAccountNumber = async () => {
+const fetchVirtualAccount = async () => {
   try {
-    await navigator.clipboard.writeText(accountNumber.value)
-    copied.value = true
-    setTimeout(() => {
-      copied.value = false
-    }, 2000)
-  } catch (err) {
-    console.error('Failed to copy:', err)
+    const response = await $fetch('/api/monnify/get-virtual-account')
+    hasAccount.value = response.hasAccount
+    if (response.hasAccount) {
+      accountData.value = response.data
+    }
+  } catch (error) {
+    toast.error('Failed to load virtual account')
+  } finally {
+    isLoading.value = false
   }
 }
 
-// SEO Configuration
-useHead({
-  title: 'Virtual Account - Rechargify | Your Dedicated Account Number',
-  meta: [
-    {
-      name: 'description',
-      content: 'Access your Rechargify virtual account. Receive instant payments from any Nigerian bank directly to your wallet.'
-    },
-    {
-      name: 'robots',
-      content: 'noindex, nofollow'
+const handleCreateAccount = async () => {
+  isCreating.value = true
+  errorMessage.value = ''
+
+  try {
+    const response = await $fetch('/api/monnify/create-virtual-account', {
+      method: 'POST',
+      body: { 
+        bvn: bvn.value,
+        nin: nin.value      // ← add this
+      }
+    })
+
+    if (response.success) {
+      toast.success('Virtual account created successfully!')
+      await fetchVirtualAccount()
     }
-  ]
+  } catch (error) {
+    errorMessage.value = error.data?.message || 'Failed to create virtual account'
+  } finally {
+    isCreating.value = false
+  }
+}
+
+const copyAccountNumber = async (number) => {
+  try {
+    await navigator.clipboard.writeText(number)
+    copied.value = true
+    setTimeout(() => copied.value = false, 2000)
+  } catch {
+    toast.error('Failed to copy account number')
+  }
+}
+
+onMounted(() => {
+  fetchVirtualAccount()
+})
+
+useHead({
+  title: 'Virtual Account - Rechargify',
+  meta: [{ name: 'robots', content: 'noindex, nofollow' }]
 })
 </script>

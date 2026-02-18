@@ -1,61 +1,67 @@
 <!-- pages/transactions/index.vue -->
 <template>
-  <div>
-    <main class="p-4 sm:p-6 lg:p-8">
-      <div style="opacity: 1; transform: none;">
-        <div class="max-w-7xl mx-auto space-y-6">
-          
-          <!-- Page Header -->
-          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div>
-              <h1 class="text-3xl font-bold text-gray-900 mb-2">
-                Transactions
-              </h1>
-              <p class="text-gray-600">
-                View and manage all your transaction history
-              </p>
-            </div>
-          </div>
+  <main class="p-4 sm:p-6 lg:p-8">
+    <div class="max-w-7xl mx-auto space-y-6">
 
-          <!-- Stats Cards -->
-          <TransactionsStatsCards />
-
-          <!-- Filter Section -->
-          <TransactionsFilterSection @filter-change="handleFilterChange" />
-
-          <!-- Transactions Table -->
-          <TransactionsTable />
-
-        </div>
+      <!-- Header -->
+      <div>
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Transactions</h1>
+        <p class="text-gray-600">View and manage all your transaction history</p>
       </div>
-    </main>
-  </div>
+
+      <!-- Stats -->
+      <TransactionsStatsCards :stats="stats" />
+
+      <!-- Filters -->
+      <TransactionsFilterSection @filter-change="handleFilterChange" />
+
+      <!-- Table -->
+      <TransactionsTable :transactions="transactions" :is-loading="isLoading" />
+
+    </div>
+  </main>
 </template>
 
 <script setup>
-// Set layout
 definePageMeta({
-  layout: 'dashboard'
+  layout: 'dashboard',
+  middleware: 'auth'
 })
 
-// Handle filter changes
-const handleFilterChange = (filters) => {
-  console.log('Filters changed:', filters)
-  // Add filter logic here - could filter transactions based on the selected filters
+const isLoading = ref(true)
+const transactions = ref([])
+const stats = ref({ totalIncome: 0, totalExpenses: 0 })
+const filters = ref({})
+
+const fetchTransactions = async () => {
+  isLoading.value = true
+  try {
+    const response = await $fetch('/api/wallet/transactions', {
+      params: filters.value
+    })
+
+    if (response.success) {
+      transactions.value = response.data.transactions
+      stats.value = response.data.stats
+    }
+  } catch (error) {
+    console.error('Failed to fetch transactions:', error)
+  } finally {
+    isLoading.value = false
+  }
 }
 
-// SEO Configuration for Transactions Page
+const handleFilterChange = (newFilters) => {
+  filters.value = newFilters
+  fetchTransactions()
+}
+
+onMounted(() => {
+  fetchTransactions()
+})
+
 useHead({
-  title: 'Transactions - Rechargify | Your Transaction History',
-  meta: [
-    {
-      name: 'description',
-      content: 'View and manage all your Rechargify transactions. Track your income, expenses, and pending transactions with detailed filters and search.'
-    },
-    {
-      name: 'robots',
-      content: 'noindex, nofollow' // Transactions page should not be indexed
-    }
-  ]
+  title: 'Transactions - Rechargify',
+  meta: [{ name: 'robots', content: 'noindex, nofollow' }]
 })
 </script>

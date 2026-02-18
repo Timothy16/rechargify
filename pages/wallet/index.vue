@@ -1,3 +1,4 @@
+<!-- pages/wallet/index.vue -->
 <template>
   <main class="p-4 sm:p-6 lg:p-8">
     <div class="max-w-4xl mx-auto">
@@ -6,173 +7,203 @@
         <p class="text-gray-600">Add money to your Rechargify wallet securely</p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Loading State -->
+      <div v-if="isPageLoading" class="flex items-center justify-center py-20">
+        <Loader2 :size="40" class="animate-spin text-[#0066FF]" />
+      </div>
+
+      <!-- No Virtual Account -->
+      <div v-else-if="!hasVirtualAccount" class="max-w-md mx-auto">
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 text-center">
+          <div class="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <CreditCard :size="36" class="text-[#0066FF]" />
+          </div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-2">No Virtual Account Yet</h2>
+          <p class="text-gray-500 mb-8">
+            You need a virtual account before you can fund your wallet.
+          </p>
+          <NuxtLink
+            to="/virtual-account"
+            class="w-full bg-[#0066FF] text-white py-3 rounded-lg font-semibold hover:bg-[#0052CC] transition flex items-center justify-center gap-2"
+          >
+            Create Virtual Account
+            <ArrowRight :size="18" />
+          </NuxtLink>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div v-else class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div class="lg:col-span-2">
-          
-          <div v-if="step === 1" class="bg-white rounded-xl border border-gray-100 shadow-sm p-8 transition-all">
-            <div class="mb-6">
-              <h2 class="text-2xl font-bold text-gray-900 mb-2">Enter Amount</h2>
-              <p class="text-gray-600">How much would you like to add?</p>
-            </div>
 
-            <div class="mb-6">
-              <label class="block text-sm font-medium text-gray-700 mb-1.5">Amount (₦)</label>
-              <input 
-                v-model="amount"
-                type="number" 
-                placeholder="0.00"
-                class="block w-full rounded-lg border border-gray-200 px-4 py-3 text-2xl font-bold text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0066FF]/20 focus:border-[#0066FF] transition-colors"
-              />
-            </div>
+          <!-- Step 1 -->
+          <FundWalletStepOne
+            v-if="step === 1"
+            v-model="amount"
+            @next="step = 2"
+          />
 
-            <div class="mb-8">
-              <div class="text-sm font-medium text-gray-700 mb-3">Quick Select</div>
-              <div class="grid grid-cols-3 sm:grid-cols-5 gap-3">
-                <button 
-                  v-for="preset in presets" 
-                  :key="preset"
-                  @click="amount = preset"
-                  class="px-4 py-3 rounded-lg border-2 font-semibold transition-all"
-                  :class="amount === preset ? 'border-[#0066FF] bg-blue-50 text-[#0066FF]' : 'border-gray-100 text-gray-700 hover:border-gray-200'"
-                >
-                  ₦{{ preset.toLocaleString() }}
-                </button>
-              </div>
-            </div>
+          <!-- Step 2 -->
+          <FundWalletStepTwo
+            v-if="step === 2"
+            :amount="amount"
+            :accounts="virtualAccounts"
+            :account-name="accountName"
+            v-model:selected-bank="selectedBankIndex"
+            :is-pay-loading="isPayLoading"
+            @pay="handleMonnifyCheckout"
+            @back="step = 1"
+          />
 
-            <button 
-              @click="step = 2"
-              :disabled="!amount || amount <= 0"
-              class="w-full h-14 bg-[#0066FF] text-white rounded-lg font-medium text-lg flex items-center justify-center gap-2 hover:bg-[#0052CC] transition-all disabled:opacity-50 active:scale-[0.98]"
-            >
-              Continue <ArrowRight :size="20" />
-            </button>
-          </div>
-
-          <div v-if="step === 2" class="bg-white rounded-xl border border-gray-100 shadow-sm p-8 transition-all">
-            <div class="mb-6">
-              <h2 class="text-2xl font-bold text-gray-900 mb-2">Bank Transfer</h2>
-              <p class="text-gray-600">Transfer ₦{{ Number(amount).toLocaleString() }} to your unique virtual account</p>
-            </div>
-
-            <div class="bg-[#0066FF] rounded-2xl p-6 mb-8 text-white shadow-lg relative overflow-hidden">
-              <div class="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
-              
-              <div class="space-y-6 relative z-10">
-                <div class="flex justify-between items-start">
-                  <div>
-                    <p class="text-blue-100 text-xs uppercase tracking-wider font-semibold mb-1">Account Number</p>
-                    <p class="text-3xl font-mono font-bold tracking-tight">{{ accountNumber }}</p>
-                  </div>
-                  <button 
-                    @click="copyAccountNumber"
-                    class="flex-shrink-0 w-12 h-12 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-xl flex items-center justify-center transition-all duration-200 active:scale-95 shadow-inner"
-                    :class="{ 'bg-green-500/40': copied }"
-                  >
-                    <Check v-if="copied" :size="22" class="text-white" />
-                    <Copy v-else :size="22" class="text-white" />
-                  </button>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4 border-t border-white/20 pt-4">
-                  <div>
-                    <p class="text-blue-100 text-[10px] uppercase font-semibold">Bank Name</p>
-                    <p class="font-bold">Wema Bank</p>
-                  </div>
-                  <div>
-                    <p class="text-blue-100 text-[10px] uppercase font-semibold">Account Name</p>
-                    <p class="font-bold truncate">Rechargify-JOHN DOE</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <button 
-              @click="step = 1"
-              class="w-full h-14 border border-gray-200 text-gray-600 rounded-lg font-medium text-lg hover:bg-gray-50 transition-all active:scale-[0.98]"
-            >
-              Back
-            </button>
-          </div>
         </div>
 
-        <div class="space-y-6">
-          <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-6 text-white">
-            <div class="flex items-center gap-3 mb-4 text-gray-400">
-              <Wallet :size="20" />
-              <span class="text-sm">Current Balance</span>
-            </div>
-            <div class="text-3xl font-bold">₦254,350.00</div>
-          </div>
-
-          <div class="bg-blue-50 border border-blue-100 rounded-xl p-6">
-            <div class="flex items-start gap-3 text-[#0066FF]">
-              <Shield :size="24" class="shrink-0" />
-              <p class="text-sm text-gray-600">
-                Bank transfer funding is instant. Once your transfer is confirmed, your wallet will be updated automatically.
-              </p>
-            </div>
-          </div>
-
-          <div class="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
-            <h3 class="font-semibold text-gray-900 mb-4">Steps</h3>
-            <div class="space-y-4">
-              <div class="flex items-center gap-3">
-                <div 
-                  class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm"
-                  :class="step === 1 ? 'bg-[#0066FF] text-white' : 'bg-green-100 text-green-600'"
-                >
-                  <Check v-if="step > 1" :size="16" />
-                  <span v-else>1</span>
-                </div>
-                <span class="text-sm font-semibold" :class="step === 1 ? 'text-gray-900' : 'text-gray-500'">Enter Amount</span>
-              </div>
-
-              <div class="flex items-center gap-3">
-                <div 
-                  class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm"
-                  :class="step === 2 ? 'bg-[#0066FF] text-white' : 'bg-gray-100 text-gray-400'"
-                >
-                  2
-                </div>
-                <span class="text-sm font-semibold" :class="step === 2 ? 'text-gray-900' : 'text-gray-400'">Bank Transfer</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- Sidebar -->
+        <FundWalletSidebar
+          :balance="balance"
+          :is-loading="isBalanceLoading"
+          :step="step"
+          @refresh="fetchBalance"
+        />
       </div>
     </div>
   </main>
 </template>
 
 <script setup>
-import { 
-  ArrowRight, 
-  Wallet, 
-  Shield, 
-  Check, 
-  Copy 
-} from 'lucide-vue-next'
+import { CreditCard, ArrowRight, Loader2 } from 'lucide-vue-next'
+import { useToast } from 'vue-toastification';
 
 definePageMeta({
-  layout: 'dashboard'
+  layout: 'dashboard',
+  middleware: 'auth'
 })
 
-const step = ref(1)
-const amount = ref('')
-const copied = ref(false)
-const accountNumber = ref('0123456789')
-const presets = [1000, 5000, 10000, 20000, 50000]
+const toast = useToast()
 
-const copyAccountNumber = async () => {
+const step = ref(1)
+const amount = ref(0)
+const isPageLoading = ref(true)
+const isBalanceLoading = ref(false)
+const isPayLoading = ref(false)
+const hasVirtualAccount = ref(false)
+const virtualAccounts = ref([])
+const accountName = ref('')
+const balance = ref(0)
+const selectedBankIndex = ref(0)
+
+// Load Monnify SDK
+useHead({
+  script: [
+    {
+      src: 'https://sdk.monnify.com/plugin/monnify.js',
+      defer: true
+    }
+  ]
+})
+
+const fetchVirtualAccount = async () => {
   try {
-    await navigator.clipboard.writeText(accountNumber.value)
-    copied.value = true
-    setTimeout(() => {
-      copied.value = false
-    }, 2000)
-  } catch (err) {
-    console.error('Failed to copy:', err)
+    const response = await $fetch('/api/monnify/get-virtual-account')
+    hasVirtualAccount.value = response.hasAccount
+    if (response.hasAccount) {
+      virtualAccounts.value = response.data.accounts
+      accountName.value = response.data.accountName
+    }
+  } catch (error) {
+    toast.error('Failed to load account details')
   }
 }
+
+const fetchBalance = async () => {
+  isBalanceLoading.value = true
+  try {
+    const response = await $fetch('/api/wallet/balance')
+    if (response.success) {
+      balance.value = response.data.balance
+    }
+  } catch (error) {
+    console.error('Failed to fetch balance:', error)
+  } finally {
+    isBalanceLoading.value = false
+  }
+}
+
+const handleMonnifyCheckout = async () => {
+  isPayLoading.value = true
+
+  try {
+    // Get payment details from backend
+    const response = await $fetch('/api/monnify/initialize-payment', {
+      method: 'POST',
+      body: { amount: amount.value }
+    })
+
+    if (!response.success) return
+
+    const { apiKey, contractCode, paymentReference, customerName, customerEmail, paymentDescription } = response.data
+
+    isPayLoading.value = false
+
+    // Open Monnify checkout
+    const MonnifySDK = window.MonnifySDK || {};
+
+MonnifySDK.initialize({
+  amount: amount.value,
+  currency: 'NGN',
+  reference: paymentReference,
+  customerFullName: customerName,
+  customerEmail,
+  apiKey,
+  contractCode,
+  paymentDescription,
+  isTestMode: true,
+  paymentMethods: ['CARD', 'ACCOUNT_TRANSFER', 'USSD', 'PHONE_NUMBER'],
+  onLoadStart: function() {
+    console.log('Monnify checkout loading...')
+  },
+  onLoadComplete: function() {
+    console.log('Monnify checkout ready')
+  },
+  onComplete: function(response) {
+    (async () => {
+      if (response.paymentStatus === 'PAID') {
+        await verifyPayment(response.transactionReference)
+      } else {
+        toast.error('Payment was not completed')
+      }
+    })()
+  },
+  onClose: function(data) {
+    console.log('Monnify checkout closed', data)
+  }
+})
+
+  } catch (error) {
+    toast.error(error.data?.message || 'Failed to initialize payment')
+    isPayLoading.value = false
+  }
+}
+
+const verifyPayment = async (transactionReference) => {
+  try {
+    const response = await $fetch('/api/monnify/verify-payment', {
+      method: 'POST',
+      body: { transactionReference }
+    })
+
+    if (response.success) {
+      await fetchBalance()
+      toast.success(`Wallet funded successfully! ₦${amount.value.toLocaleString()} added.`)
+      step.value = 1
+      amount.value = 0
+    }
+  } catch (error) {
+    toast.error(error.data?.message || 'Payment verification failed')
+  }
+}
+
+onMounted(async () => {
+  await Promise.all([fetchVirtualAccount(), fetchBalance()])
+  isPageLoading.value = false
+})
 </script>
