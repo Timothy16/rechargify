@@ -5,7 +5,7 @@
       
       <!-- Mobile Menu Button -->
       <button 
-        class="lg:hidden p-2 text-gray-600 hover:text-gray-900"
+        class="lg:hidden p-2 text-gray-600 n hover:text-gray-900"
         @click="$emit('toggle-mobile-menu')"
       >
         <Menu :size="24" />
