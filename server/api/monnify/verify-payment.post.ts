@@ -49,7 +49,10 @@ export default defineEventHandler(async (event) => {
       throw createError({ statusCode: 400, message: 'Failed to verify payment' });
     }
 
-    const { paymentStatus, amountPaid } = response.responseBody;
+    const { paymentStatus, amountPaid: rawAmountPaid } = response.responseBody;
+
+    // Monnify verify API returns amountPaid as a string e.g "100.00" — parse it to number
+    const amountPaid = parseFloat(rawAmountPaid);
 
     if (paymentStatus !== 'PAID') {
       throw createError({ statusCode: 400, message: 'Payment not completed' });
@@ -65,7 +68,7 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    const balanceBefore = wallet.balance;
+    const balanceBefore = Number(wallet.balance);
     const balanceAfter = balanceBefore + amountPaid;
 
     // Credit wallet

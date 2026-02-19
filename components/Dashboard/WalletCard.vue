@@ -59,7 +59,7 @@
       <!-- Action Button -->
       <div>
         <NuxtLink
-          to="/virtual-account"
+          to="/wallet"
           class="w-full bg-white text-[#0066FF] hover:bg-white/95 rounded-xl px-6 py-3.5 font-semibold text-center transition-all duration-200 active:scale-[0.98] shadow-lg flex items-center justify-center gap-2"
         >
           <Plus :size="20" />
