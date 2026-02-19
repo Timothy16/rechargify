@@ -15,10 +15,10 @@ export default defineEventHandler(async (event) => {
     const clientIP = getRequestIP(event, { xForwardedFor: true });
     const allowedIPs = (config.allowedWebhookIPs ?? '').split(',').map((ip: string) => ip.trim());
 
-    if (!allowedIPs.includes(clientIP)) {
-      console.error('Webhook: Unauthorized IP:', clientIP);
-      return { success: false };
-    }
+    // if (!allowedIPs.includes(clientIP)) {
+    //   console.error('Webhook: Unauthorized IP:', clientIP);
+    //   return { success: false };
+    // }
 
     const body = await readBody(event);
     const { eventType, eventData } = body;
