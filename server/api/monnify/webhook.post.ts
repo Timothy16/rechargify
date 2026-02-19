@@ -3,31 +3,24 @@ import { RechargifyVirtualAccount } from '~/models/RechargifyVirtualAccount.mode
 import { RechargifyWallet } from '~/models/RechargifyWallet.model';
 import { RechargifyWalletTransaction } from '~/models/RechargifyWalletTransaction.model';
 import { ensureConnection } from '~/utils/mongodb';
-import { createHmac } from 'crypto';
+import { getRequestIP } from 'h3';
 
 export default defineEventHandler(async (event) => {
   try {
     await ensureConnection();
 
     const config = useRuntimeConfig();
+
+    // IP Whitelist check
+    const clientIP = getRequestIP(event, { xForwardedFor: true });
+    const allowedIPs = (config.allowedWebhookIPs ?? '').split(',').map((ip: string) => ip.trim());
+
+    if (!allowedIPs.includes(clientIP)) {
+      console.error('Webhook: Unauthorized IP:', clientIP);
+      return { success: false };
+    }
+
     const body = await readBody(event);
-
-    // Verify Monnify webhook signature
-    const monnifySignature = getHeader(event, 'monnify-signature');
-    if (!monnifySignature) {
-      console.error('Webhook: Missing Monnify signature');
-      return { success: false };
-    }
-
-    const computedHash = createHmac('sha512', config.monnifySecretKey)
-      .update(JSON.stringify(body))
-      .digest('hex');
-
-    if (computedHash !== monnifySignature) {
-      console.error('Webhook: Invalid signature');
-      return { success: false };
-    }
-
     const { eventType, eventData } = body;
 
     // Only process successful reserved account payments
@@ -35,12 +28,7 @@ export default defineEventHandler(async (event) => {
       return { success: true };
     }
 
-    const {
-      product,
-      amountPaid,
-      transactionReference,
-      paymentReference
-    } = eventData;
+    const { product, amountPaid, transactionReference, paymentReference } = eventData;
 
     // product.reference is the accountReference we set
     const virtualAccount = await RechargifyVirtualAccount.findOne({

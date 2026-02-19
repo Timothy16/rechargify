@@ -38,6 +38,7 @@ export default defineNuxtConfig({
     monnifySecretKey: process.env.MONNIFY_SECRET_KEY,
     monnifyContractCode: process.env.MONNIFY_CONTRACT_CODE,
     monnifyBaseUrl: process.env.MONNIFY_BASE_URL,
+    allowedWebhookIPs: process.env.ALLOWED_WEBHOOK_IPS,
     public: {
       appUrl: process.env.APP_URL,
     },
