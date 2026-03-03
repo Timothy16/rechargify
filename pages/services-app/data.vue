@@ -108,10 +108,7 @@
         </div>
 
         <div class="space-y-6">
-          <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-6 text-white shadow-sm">
-            <div class="flex items-center gap-3 mb-4"><Wallet :size="20" class="text-gray-400" /> <span class="text-gray-400 text-sm">Wallet Balance</span></div>
-            <div class="text-3xl font-bold">₦254,350.00</div>
-          </div>
+           <WalletBalance />
           <div class="bg-purple-50 border border-purple-100 rounded-xl p-6">
             <h3 class="font-semibold text-gray-900 mb-4">Benefits</h3>
             <div class="space-y-3 text-sm">
