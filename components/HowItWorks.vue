@@ -86,13 +86,13 @@ const steps = [
     icon: Users
   },
   {
-    title: 'Add Payment Method',
-    description: 'Link your bank account or debit card securely to fund your wallet and start enjoying seamless transactions.',
+    title: 'Set Up Your Virtual Account',
+    description: 'Create your dedicated virtual account to fund your balance easily and enjoy seamless bill payments anytime.',
     icon: CircleCheckBig
   },
   {
-    title: 'Start Transacting',
-    description: 'Fund your wallet via bank transfer or card and start making payments, transfers, and purchases immediately.',
+    title: 'Pay Your Bills',
+    description: 'Pay electricity, internet, cable TV, airtime, and data bills instantly—all from one place.',
     icon: DollarSign
   }
 ]
