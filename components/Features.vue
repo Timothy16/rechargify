@@ -58,7 +58,7 @@ const features = [
   },
   {
     title: 'Instant Payments',
-    description: 'Pay utility bills, buy airtime, and transfer money instantly with zero delays across all networks.',
+    description: 'Pay electricity, internet, cable TV, airtime, and data bills instantly with a few taps.',
     icon: Zap,
     iconBg: 'bg-orange-500'
   },
