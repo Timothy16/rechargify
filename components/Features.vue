@@ -51,12 +51,6 @@ import { Smartphone, CreditCard, Zap, PiggyBank, TrendingUp, Shield } from 'luci
 
 const features = [
   {
-    title: 'Digital Wallet',
-    description: 'Store funds securely with instant access. Send and receive money in seconds across Africa.',
-    icon: Smartphone,
-    iconBg: 'bg-blue-500'
-  },
-  {
     title: 'Virtual Cards',
     description: 'Create unlimited virtual cards for safe online shopping and subscription management worldwide.',
     icon: CreditCard,

@@ -6,7 +6,7 @@
         Ready to take control of your finances?
       </h2>
       <p class="text-xl md:text-2xl text-gray-600 mb-12">
-        Join 50,000+ Africans who trust Rechargify for their daily financial needs.
+        Join 50,000+ Nigerians who trust Rechargify for their daily financial needs.
       </p>
 
       <!-- CTA Buttons -->

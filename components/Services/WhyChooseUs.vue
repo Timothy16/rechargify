@@ -13,7 +13,7 @@
             More than just a payment platform
           </h2>
           <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-            We're building the financial infrastructure that Africa deserves. Fast, secure, and designed with you in mind.
+            We're building the financial infrastructure that Nigeria deserves. Fast, secure, and designed with you in mind.
           </p>
 
           <!-- Reasons List -->
@@ -42,7 +42,7 @@
         <div class="relative">
           <NuxtImg 
             src="https://res.cloudinary.com/dtmt0vas4/image/upload/v1769461164/ChatGPT_Image_Jan_26_2026_09_58_24_PM_m4l0np.png" 
-            alt="African professional using Rechargify services confidently" 
+            alt="Nigerian professional using Rechargify services confidently" 
             class="rounded-3xl shadow-2xl w-full h-auto object-cover"
             loading="lazy"
             width="800"

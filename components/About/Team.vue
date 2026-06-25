@@ -9,7 +9,7 @@
           OUR TEAM
         </span>
         <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-          Built by Africans, for Africans
+          Built by Nigerians, for Nigerians
         </h2>
         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
           Our diverse team of engineers, designers, and financial experts is united by a common goal: making financial services accessible to everyone.

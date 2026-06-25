@@ -27,7 +27,7 @@ useHead({
     },
     {
       name: 'keywords',
-      content: 'digital wallet africa, bill payments nigeria, airtime topup, data bundles, gift cards, utility bills, virtual account number, fintech services'
+      content: 'digital wallet Nigeria, bill payments nigeria, airtime topup, data bundles, gift cards, utility bills, virtual account number, fintech services'
     },
     // Open Graph / Facebook
     {

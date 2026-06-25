@@ -20,15 +20,15 @@
 <script setup>
 // SEO Configuration for About Page
 useHead({
-  title: 'About Us - Rechargify | Building the Future of African Finance',
+  title: 'About Us - Rechargify | Building the Future of Nigerian Finance',
   meta: [
     {
       name: 'description',
-      content: 'Learn about Rechargify\'s mission to democratize financial services across Africa. Discover our story, values, and commitment to empowering 50,000+ users with secure digital banking.'
+      content: 'Learn about Rechargify\'s mission to democratize financial services across Nigeria. Discover our story, values, and commitment to empowering 50,000+ users with secure digital banking.'
     },
     {
       name: 'keywords',
-      content: 'Rechargify about, african fintech company, digital banking africa, fintech mission, financial inclusion africa, licensed fintech nigeria'
+      content: 'Rechargify about, Nigerian fintech company, digital banking Nigeria, fintech mission, financial inclusion Nigeria, licensed fintech nigeria'
     },
     // Open Graph / Facebook
     {
@@ -41,11 +41,11 @@ useHead({
     },
     {
       property: 'og:title',
-      content: 'About Us - Rechargify | Building the Future of African Finance'
+      content: 'About Us - Rechargify | Building the Future of Nigerian Finance'
     },
     {
       property: 'og:description',
-      content: 'Learn about Rechargify\'s mission to democratize financial services across Africa. Trusted by 50,000+ users.'
+      content: 'Learn about Rechargify\'s mission to democratize financial services across Nigeria. Trusted by 50,000+ users.'
     },
     {
       property: 'og:image',
@@ -62,11 +62,11 @@ useHead({
     },
     {
       name: 'twitter:title',
-      content: 'About Us - Rechargify | Building the Future of African Finance'
+      content: 'About Us - Rechargify | Building the Future of Nigerian Finance'
     },
     {
       name: 'twitter:description',
-      content: 'Learn about Rechargify\'s mission to democratize financial services across Africa.'
+      content: 'Learn about Rechargify\'s mission to democratize financial services across Nigeria.'
     },
     {
       name: 'twitter:image',
@@ -95,7 +95,7 @@ const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
   name: 'About Rechargify',
-  description: 'Rechargify is democratizing financial services across Africa with fast, secure, and affordable digital banking solutions.',
+  description: 'Rechargify is democratizing financial services across Nigeria with fast, secure, and affordable digital banking solutions.',
   url: 'https://Rechargify.com/about',
   mainEntity: {
     '@type': 'Organization',

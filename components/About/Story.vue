@@ -8,7 +8,7 @@
         <div class="relative">
           <NuxtImg 
             src="https://res.cloudinary.com/dtmt0vas4/image/upload/v1769444452/ChatGPT_Image_Jan_26_2026_05_13_10_PM_ety7fa.png"
-            alt="African fintech team collaborating"
+            alt="Nigerian fintech team collaborating"
             class="relative rounded-3xl shadow-2xl border border-gray-100 w-full h-auto object-cover"
             loading="lazy"
             width="1200"
@@ -29,29 +29,26 @@
         </div>
 
         <!-- Content -->
-        <div>
-          <span class="text-[#0066FF] font-semibold text-sm uppercase tracking-wider mb-4 block">
-            WHY WE EXIST
-          </span>
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            The problem we're solving
-          </h2>
-          
-          <div class="space-y-6 text-gray-600 text-lg leading-relaxed">
-            <p>
-              In 2021, we noticed a critical gap in the African financial ecosystem. Traditional banks were too slow and bureaucratic, while existing fintech solutions were either too complex or lacked the trust factor needed for widespread adoption.
-            </p>
-            <p>
-              Millions of Africans were being left behind—unable to access basic financial services,  or participate in the digital economy. We knew something had to change.
-            </p>
-            <p>
-              We set out to build a platform that combines the trust and security of a traditional bank with the speed and innovation of a modern tech company. A place where anyone can manage their money without headaches, hidden fees, or unnecessary complexity.
-            </p>
-            <p class="font-semibold text-gray-900">
-              Today, Rechargify serves over 50,000 customers across 12 African countries, helping them pay bills, grow their businesses, and achieve financial freedom.
-            </p>
-          </div>
-        </div>
+        <!-- Content -->
+<div>
+  <span class="text-[#0066FF] font-semibold text-sm uppercase tracking-wider mb-4 block">
+    WHY WE EXIST
+  </span>
+
+  <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+    Making bill payments effortless
+  </h2>
+
+  <div class="space-y-6 text-gray-600 text-lg leading-relaxed">
+    <p>
+      Paying for everyday services shouldn't be complicated. We built Rechargify to make paying for electricity, internet, airtime, data, and other utilities fast, secure, and convenient.
+    </p>
+
+    <p class="font-semibold text-gray-900">
+      One trusted platform for all your everyday payments.
+    </p>
+  </div>
+</div>
       </div>
     </div>
   </section>

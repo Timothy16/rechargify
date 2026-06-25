@@ -6,7 +6,7 @@
         Ready to experience the difference?
       </h2>
       <p class="text-xl text-gray-600 mb-10">
-        Join thousands of Africans who have simplified their financial lives with Rechargify.
+        Join thousands of Nigerians who have simplified their financial lives with Rechargify.
       </p>
 
       <!-- CTA Buttons -->

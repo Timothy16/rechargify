@@ -43,7 +43,7 @@
           <div class="relative">
             <NuxtImg 
               src="https://res.cloudinary.com/dtmt0vas4/image/upload/v1769592024/ChatGPT_Image_Jan_28_2026_10_13_25_AM_g5lzjl.png" 
-              alt="African woman confidently using secure mobile banking" 
+              alt="Nigerian woman confidently using secure mobile banking" 
               class="rounded-2xl shadow-2xl w-full h-auto object-cover"
               loading="lazy"
               width="800"

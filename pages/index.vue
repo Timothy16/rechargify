@@ -19,15 +19,15 @@
 <script setup >
 // SEO Configuration
 useHead({
-  title: 'Rechargify - Modern Banking Made Simple for Africa',
+  title: 'Rechargify - Modern Banking Made Simple for Nigeria',
   meta: [
     {
       name: 'description',
-      content: 'Pay bills, and manage your finances with Rechargify. Trusted by 50,000+ Africans. Fast, secure, and reliable digital banking solutions for everyone.'
+      content: 'Pay bills, and manage your finances with Rechargify. Trusted by 50,000+ Nigerians. Fast, secure, and reliable digital banking solutions for everyone.'
     },
     {
       name: 'keywords',
-      content: 'digital banking africa, mobile money, pay bills online, virtual cards, fintech africa, online banking'
+      content: 'digital banking Nigeria, mobile money, pay bills online, virtual cards, fintech Nigeria, online banking'
     },
     // Open Graph / Facebook
     {
@@ -40,11 +40,11 @@ useHead({
     },
     {
       property: 'og:title',
-      content: 'Rechargify - Modern Banking Made Simple for Africa'
+      content: 'Rechargify - Modern Banking Made Simple for Nigeria'
     },
     {
       property: 'og:description',
-      content: 'Pay bills, and manage your finances with Rechargify. Trusted by 50,000+ Africans.'
+      content: 'Pay bills, and manage your finances with Rechargify. Trusted by 50,000+ Nigerians.'
     },
     {
       property: 'og:image',
@@ -61,11 +61,11 @@ useHead({
     },
     {
       name: 'twitter:title',
-      content: 'Rechargify - Modern Banking Made Simple for Africa'
+      content: 'Rechargify - Modern Banking Made Simple for Nigeria'
     },
     {
       name: 'twitter:description',
-      content: 'Pay bills, and manage your finances with Rechargify. Trusted by 50,000+ Africans.'
+      content: 'Pay bills, and manage your finances with Rechargify. Trusted by 50,000+ Nigerians.'
     },
     {
       name: 'twitter:image',
@@ -114,7 +114,7 @@ const structuredData = {
     {
       '@type': 'Organization',
       name: 'Rechargify',
-      description: 'Modern digital banking solutions for Africa',
+      description: 'Modern digital banking solutions for Nigeria',
       url: 'https://Rechargify.com',
       logo: 'https://Rechargify.com/favicon.png',
       contactPoint: {
@@ -145,7 +145,7 @@ const structuredData = {
       '@type': 'FinancialService',
       name: 'Rechargify',
       image: 'https://Rechargify.com/favicon.png',
-      description: 'Digital banking platform offering wallet services, virtual cards, bill payments, and international transfers across Africa.',
+      description: 'Digital banking platform offering wallet services, virtual cards, bill payments, and international transfers across Nigeria.',
       address: {
         '@type': 'PostalAddress',
         addressCountry: 'NG'

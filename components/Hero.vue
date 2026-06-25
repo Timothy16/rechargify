@@ -5,91 +5,75 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         
         <!-- Left Content -->
-        <div 
-          class="text-center lg:text-left"
-          :class="{ 'animate-fade-in-up': isVisible }"
-        >
-          <!-- Trust Badge -->
-          <span class="inline-flex items-center px-4 py-2 rounded-full bg-blue-50 text-[#0066FF] text-sm font-semibold mb-6 border border-blue-100">
-            <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
-            Trusted by 50,000+ Africans
+      <div
+        class="text-center lg:text-left"
+        :class="{ 'animate-fade-in-up': isVisible }"
+      >
+        <!-- Trust Badge -->
+        <span class="inline-flex items-center px-4 py-2 rounded-full bg-blue-50 text-[#0066FF] text-sm font-semibold mb-6 border border-blue-100">
+          <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+          Trusted by Thousands of Users
+        </span>
+
+        <!-- Main Heading -->
+        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 tracking-tight mb-6 leading-tight">
+          One platform for
+          <br>
+          <span class="text-[#0066FF] relative inline-block">
+            all your bill payments
+            <svg
+              class="absolute -bottom-2 left-0 w-full"
+              height="12"
+              viewBox="0 0 300 12"
+              fill="none"
+            >
+              <path
+                d="M2 10C100 2 200 2 298 10"
+                stroke="#0066FF"
+                stroke-width="3"
+                stroke-linecap="round"
+                opacity="0.3"
+              />
+            </svg>
           </span>
+        </h1>
 
-          <!-- Main Heading -->
-          <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 tracking-tight mb-6 leading-tight">
-            Banking made
-            <br>
-            <span class="text-[#0066FF] relative inline-block">
-              simple
-              <svg 
-                class="absolute -bottom-2 left-0 w-full" 
-                height="12" 
-                viewBox="0 0 300 12" 
-                fill="none"
-              >
-                <path 
-                  d="M2 10C100 2 200 2 298 10" 
-                  stroke="#0066FF" 
-                  stroke-width="3" 
-                  stroke-linecap="round" 
-                  opacity="0.3"
-                />
-              </svg>
-            </span>
-            for Africa
-          </h1>
+        <!-- Subtitle -->
+        <p class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+          Easily pay electricity, internet, cable TV, airtime, and data bills from one secure platform. Fast, reliable, and designed to simplify your everyday payments.
+        </p>
 
-          <!-- Subtitle -->
-          <p class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-            Pay bills, and manage your finances with the speed of a tech startup and the security of a bank.
-          </p>
-
-          <!-- CTA Buttons -->
-          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12">
-            <button 
-              class="w-full sm:w-auto inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.98] bg-[#0066FF] text-white hover:bg-[#0052CC] focus:ring-[#0066FF] shadow-sm hover:shadow-md h-14 px-8 text-lg group"
-              @click="handleCreateAccount"
-            >
-              Create Free Account
-              <ArrowRight :size="20" class="ml-2 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <!-- <button 
-              class="w-full sm:w-auto inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.98] bg-transparent border-2 border-[#0066FF] text-[#0066FF] hover:bg-blue-50 focus:ring-[#0066FF] h-14 px-8 text-lg"
-              @click="handleWatchDemo"
-            >
-              Watch Demo
-            </button> -->
-          </div>
-
-          <!-- Trust Indicators -->
-          <div class="grid grid-cols-2 gap-4 max-w-md mx-auto lg:mx-0">
-            <div class="flex items-center gap-2 text-gray-600">
-              <div class="text-[#0066FF]">
-                <Lock :size="20" />
-              </div>
-              <span class="text-sm font-medium">256-bit SSL Encryption</span>
-            </div>
-            <div class="flex items-center gap-2 text-gray-600">
-              <div class="text-[#0066FF]">
-                <Shield :size="20" />
-              </div>
-              <span class="text-sm font-medium">PCI DSS Compliant</span>
-            </div>
-            <div class="flex items-center gap-2 text-gray-600">
-              <div class="text-[#0066FF]">
-                <CircleCheckBig :size="20" />
-              </div>
-              <span class="text-sm font-medium">Licensed by CBN</span>
-            </div>
-            <div class="flex items-center gap-2 text-gray-600">
-              <div class="text-[#0066FF]">
-                <Clock :size="20" />
-              </div>
-              <span class="text-sm font-medium">24/7 Support</span>
-            </div>
-          </div>
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12">
+          <button
+            class="w-full sm:w-auto inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.98] bg-[#0066FF] text-white hover:bg-[#0052CC] focus:ring-[#0066FF] shadow-sm hover:shadow-md h-14 px-8 text-lg group"
+            @click="handleCreateAccount"
+          >
+            Get Started
+            <ArrowRight
+              :size="20"
+              class="ml-2 group-hover:translate-x-1 transition-transform"
+            />
+          </button>
         </div>
 
+        <!-- Trust Indicators -->
+        <div class="grid grid-cols-2 gap-4 max-w-md mx-auto lg:mx-0">
+          <div class="flex items-center gap-2 text-gray-600">
+            <div class="text-[#0066FF]">
+              <Lock :size="20" />
+            </div>
+            <span class="text-sm font-medium">Secure Payments</span>
+          </div>
+
+          <div class="flex items-center gap-2 text-gray-600">
+            <div class="text-[#0066FF]">
+              <Clock :size="20" />
+            </div>
+            <span class="text-sm font-medium">24/7 Availability</span>
+          </div>
+        </div>
+      </div>
         <!-- Right Content - Hero Image -->
         <div 
           class="relative"
@@ -97,7 +81,7 @@
         >
           <NuxtImg 
             src="https://res.cloudinary.com/dtmt0vas4/image/upload/v1769461839/ChatGPT_Image_Jan_26_2026_10_10_10_PM_zfpzdq.png" 
-            alt="African woman using Rechargify mobile banking app on smartphone" 
+            alt="Nigerian woman using Rechargify mobile banking app on smartphone" 
             class="rounded-3xl shadow-2xl border border-gray-100 w-full h-auto object-cover"
             loading="eager"
             width="1200"

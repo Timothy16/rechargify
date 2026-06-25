@@ -7,10 +7,10 @@
           Our Story
         </span>
         <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-          Building the future of <br>African finance
+          Building the future of <br>Nigerian finance
         </h1>
         <p class="text-lg sm:text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed">
-          Rechargify is on a mission to democratize financial services across Africa. We believe that everyone deserves access to fast, secure, and affordable financial tools that empower growth and prosperity.
+          Rechargify is on a mission to democratize financial services across Nigeria. We believe that everyone deserves access to fast, secure, and affordable financial tools that empower growth and prosperity.
         </p>
       </div>
     </div>

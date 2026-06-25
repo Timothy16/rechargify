@@ -3,7 +3,7 @@
   <section class="py-24 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-        Trusted by thousands across Africa
+        Trusted by thousands across Nigeria
       </h2>
       <p class="text-xl text-gray-600 mb-12">
         Join the financial revolution
@@ -26,8 +26,8 @@
 <script setup>
 const partners = [
   'TECHCABAL',
-  'DISRUPT AFRICA',
-  'VENTURES AFRICA',
+  'DISRUPT Nigeria',
+  'VENTURES Nigeria',
   'TECHPOINT'
 ]
 </script>

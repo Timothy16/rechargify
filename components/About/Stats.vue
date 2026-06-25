@@ -32,7 +32,7 @@ import { Users, TrendingUp, Globe, Heart } from 'lucide-vue-next'
 const stats = [
   { value: '50K+', label: 'Active Users', icon: Users },
   { value: '₦10B+', label: 'Transactions Processed', icon: TrendingUp },
-  { value: '12', label: 'Countries Supported', icon: Globe },
+ { value: '99.9%', label: 'Transaction Success Rate', icon: Globe },
   { value: '45+', label: 'Team Members', icon: Heart }
 ]
 </script>

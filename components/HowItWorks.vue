@@ -8,7 +8,7 @@
         <div class="relative order-2 lg:order-1">
           <NuxtImg 
             src="https://res.cloudinary.com/dtmt0vas4/image/upload/v1769592021/Collaboration_in_a_modern_office_zgsnbh.png"
-            alt="African fintech team collaborating on digital finance solutions"
+            alt="Nigerian fintech team collaborating on digital finance solutions"
             class="rounded-3xl shadow-2xl border border-gray-100 w-full h-auto object-cover"
             loading="lazy"
             width="1200"

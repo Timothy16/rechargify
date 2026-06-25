@@ -52,44 +52,44 @@ import { Target, Users, Heart, Zap, Shield, Globe } from 'lucide-vue-next'
 
 const values = [
   {
-    title: 'Mission Driven',
+    title: 'Simplicity',
     description:
-      'We are laser-focused on democratizing financial access for every African, regardless of their background or location.',
+      'We believe paying bills should be easy. Our platform is designed to make everyday payments simple, fast, and stress-free.',
     icon: Target,
     bgClass: 'bg-gradient-to-br from-blue-500/10 to-blue-600/10'
   },
   {
     title: 'Customer First',
     description:
-      "Every decision we make starts with our customers' needs and ends with their satisfaction. Your success is our success.",
+      'Everything we build starts with our customers. We are committed to delivering the best payment experience every time.',
     icon: Users,
     bgClass: 'bg-gradient-to-br from-purple-500/10 to-purple-600/10'
   },
   {
     title: 'Transparency',
     description:
-      'No hidden fees, no confusing terms, no surprises. Just honest, clear financial services you can trust.',
+      'No hidden charges and no surprises. We believe in clear pricing and honest service you can trust.',
     icon: Heart,
     bgClass: 'bg-gradient-to-br from-green-500/10 to-green-600/10'
   },
   {
     title: 'Innovation',
     description:
-      'We continuously push boundaries to bring you cutting-edge financial solutions that make life easier.',
+      'We continuously improve our platform to deliver faster, smarter, and more convenient ways to pay for everyday services.',
     icon: Zap,
     bgClass: 'bg-gradient-to-br from-orange-500/10 to-orange-600/10'
   },
   {
     title: 'Security First',
     description:
-      'Your trust is sacred. We invest heavily in security to ensure your money and data are always protected.',
+      'Your data and transactions are protected with industry-standard security so you can pay with confidence.',
     icon: Shield,
     bgClass: 'bg-gradient-to-br from-red-500/10 to-red-600/10'
   },
   {
-    title: 'Pan-African Vision',
+    title: 'Reliability',
     description:
-      "We're building financial infrastructure that connects Africans across borders and empowers economic growth.",
+      'We are committed to providing a dependable platform that keeps your essential payments running anytime, anywhere.',
     icon: Globe,
     bgClass: 'bg-gradient-to-br from-indigo-500/10 to-indigo-600/10'
   }

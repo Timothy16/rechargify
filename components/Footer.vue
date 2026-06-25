@@ -16,7 +16,7 @@
           </NuxtLink>
           
           <p class="text-gray-500 text-sm leading-relaxed mb-6">
-            Modern financial solutions for everyone. Secure, fast, and reliable payments for your business and personal needs.
+            One platform for all your bill payments—fast, secure, and designed for everyday convenience.
           </p>
 
           <!-- Social Links -->
@@ -117,7 +117,6 @@ const productLinks = [
   { name: 'Wallet', path: '#' },
   { name: 'Virtual Cards', path: '#' },
   { name: 'Bill Payments', path: '#' },
-  { name: 'Exchange', path: '#' },
   { name: 'Business', path: '#' }
 ]
 
